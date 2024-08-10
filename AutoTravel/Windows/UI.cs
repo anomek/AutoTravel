@@ -17,6 +17,8 @@ internal class UI : IDisposable
 
     private MainWindow MainWindow { get; init; }
 
+    private ConfigWindow ConfigWindow { get; init; }
+
     private TravelButtonWindow TravelButton { get; init; }
 
     private TravelButtonWindow[] TravelButtons { get; init; }
@@ -27,6 +29,7 @@ internal class UI : IDisposable
         this.tools = new Tools(textureProvider);
 
         this.MainWindow = new MainWindow(controller);
+        this.ConfigWindow = new ConfigWindow(controller);
         this.TravelButton = new TravelButtonWindow(-1, this.tools, this.controller);
         this.TravelButtons = new TravelButtonWindow[8];
         for (var i = 0; i < this.TravelButtons.Length; i++)
@@ -36,6 +39,7 @@ internal class UI : IDisposable
         }
 
         this.windowSystem.AddWindow(this.MainWindow);
+        this.windowSystem.AddWindow(this.ConfigWindow);
         this.windowSystem.AddWindow(this.TravelButton);
     }
 
@@ -53,6 +57,7 @@ internal class UI : IDisposable
     internal void Register(IUiBuilder uiBuilder)
     {
         uiBuilder.Draw += this.windowSystem.Draw;
+        uiBuilder.OpenConfigUi += this.ConfigWindow.Open;
     }
 
     internal void ToggleMainUI(bool open)

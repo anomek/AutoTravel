@@ -1,12 +1,20 @@
 {
-  "Author": "Anomek",
-  "Name": "Auto Tavel",
-  "Punchline": "Travel between DCs with single click.",
-  "Description": "Automates whole datacenter travel. Select your destination and enjoy, while plugin is going through all menus.",
-  "ApplicableVersion": "any",
-  "Tags": [
-    "dc",
-    "data center",
-    "travel"
-  ]
+    "Author": "Anomek",
+    "Name": "Auto Travel",
+    "Punchline": "Travel between Data Centers with single click.",
+    "Description": "Automates Data Center travel process. Select your destination and enjoy, while plugin is going through all menus.",
+    "ApplicableVersion": "any",
+    "Tags": [
+        "dc",
+        "data",
+        "center",
+        "travel"
+    ],
+    "RepoUrl": "https://github.com/Anomek/AutoTravel",
+    "IconUrl": "https://github.com/Anomek/AutoTravel/raw/master/res/icon.jpg",
+    "ImageUrls": [
+        "https://github.com/anomek/AutoTravel/raw/master/res/image1.png",
+        "https://github.com/anomek/AutoTravel/raw/master/res/image2.png"
+    ],
+    "Changelog": "https://github.com/anomek/AutoTravel/releases"
 }
