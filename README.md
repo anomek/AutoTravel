@@ -1,10 +1,15 @@
-# AutoTravel
+# <img src="res/icon.png" width="64"> AutoTravel
 
 Travel between datacenters with single click
 
 ## Installation
 
 See: https://github.com/anomek/MyDalamudPlugins
+
+## Details
+
+![](res/image1.png)
+![](res/image2.png)
 
 ## Acknowledgments
 
