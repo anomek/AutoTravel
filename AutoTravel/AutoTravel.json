@@ -1,0 +1,12 @@
+{
+  "Author": "Anomek",
+  "Name": "Auto Tavel",
+  "Punchline": "Travel between DCs with single click.",
+  "Description": "Automates whole datacenter travel. Select your destination and enjoy, while plugin is going through all menus.",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "dc",
+    "data center",
+    "travel"
+  ]
+}
