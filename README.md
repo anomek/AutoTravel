@@ -2,11 +2,11 @@
 
 Travel between datacenters with single click
 
-# Installation
+## Installation
 
 See: https://github.com/anomek/MyDalamudPlugins
 
-# Acknowledgments
+## Acknowledgments
 
 * inspired by https://github.com/PunishXIV/YesAlready
 * some code copied from https://github.com/NightmareXIV/ECommons
