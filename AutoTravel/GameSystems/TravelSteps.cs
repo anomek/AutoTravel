@@ -1,6 +1,7 @@
 using AutoTravel.GameSystems.Steps;
 using AutoTravel.Utils;
 using Dalamud.Plugin.Services;
+using System;
 
 namespace AutoTravel.GameSystems;
 
@@ -64,5 +65,20 @@ internal unsafe class TravelSteps(IGameGui gameGui, AddonInterfaceProvider addon
     internal BaseStep ConfirmHomeTravel(IStepActions actions)
     {
         return new ConfirmHomeTravelStep(this.addonInterfaceProvider, this.EventLoop, actions);
+    }
+
+    internal BaseStep ConfirmLogout(IStepActions actions)
+    {
+        return new ConfirmLogoutStep(this.addonInterfaceProvider, this.EventLoop, actions);
+    }
+
+    internal BaseStep CancelWorldList(IStepActions actions)
+    {
+        return new FireAddonStep(this.addonInterfaceProvider, "LobbyDKTWorldList", this.EventLoop, actions, 5);
+    }
+
+    internal StepList.CreateStep DelayStep(TimeSpan delay)
+    {
+        return actions => new DelayStep(delay, this.EventLoop, actions);
     }
 }

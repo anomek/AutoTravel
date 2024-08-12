@@ -8,12 +8,14 @@ internal unsafe class FireAddonStep : BaseStep
 {
     private readonly AddonInterface<AtkUnitBase> addon;
     private readonly object[] values;
+    private readonly string name;
 
     private bool running;
 
     internal FireAddonStep(AddonInterfaceProvider addonInterfaceProvider, string addonName, EventLoop eventLoop, IStepActions actions, params object[] values)
         : base(eventLoop, actions)
     {
+        this.name = addonName;
         this.addon = addonInterfaceProvider.AddonInterface<AtkUnitBase>(addonName);
         this.addon.AddHandler(AddonEvent.PostUpdate, this.Handler);
         this.values = values;
@@ -26,7 +28,7 @@ internal unsafe class FireAddonStep : BaseStep
 
     protected override void RunInternal()
     {
-        Plugin.Log.Info("Runing fire addon step");
+        Plugin.Log.Info($"Runing fire addon step {this.name}");
         this.running = true;
     }
 
@@ -39,7 +41,7 @@ internal unsafe class FireAddonStep : BaseStep
     {
         if (this.running)
         {
-            Plugin.Log.Info("Firing addon");
+            Plugin.Log.Info($"Firing addon {this.name}");
             Callbacks.Fire(addon, true, this.values);
             this.running = false;
             this.Success();

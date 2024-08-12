@@ -32,6 +32,16 @@ internal class ConfigWindow : Window
         }
 
         ImGui.TextUnformatted("TIP: you can move it around with right mouse button");
+        ImGui.NewLine();
+
+        bool retryConfestedDataCenter = this.configuration.RetryCongestedDataCenter;
+        if (ImGui.Checkbox("Retry travel to congested data center", ref retryConfestedDataCenter))
+        {
+            this.configuration.RetryCongestedDataCenter = retryConfestedDataCenter;
+            this.configuration.Save();
+        }
+
+        ImGui.TextUnformatted("Plugin will keep trying to travel to congested data center until it succeeds or travel is canceled");
     }
 
     public void Open()

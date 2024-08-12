@@ -19,7 +19,7 @@ internal unsafe class SystemMenuStep(IGameGui gameGui, EventLoop eventLoop, ISte
         var addonAddr = this.gameGui.GetAddonByName("_MainCommand");
         if (addonAddr == 0)
         {
-            this.Fail("Can't log out from game. Log out manually and travel from character selection menu");
+            this.Fail(StepFailure.LogoutUnavailable);
         }
         else
         {

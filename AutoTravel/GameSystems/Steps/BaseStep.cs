@@ -27,7 +27,7 @@ internal abstract class BaseStep(EventLoop eventLoop, IStepActions actions)
         this.eventLoop.Add(this.actions.OnSuccess);
     }
 
-    protected void Fail(string message)
+    protected void Fail(StepFailure message)
     {
         this.eventLoop.Add(() => this.actions.OnFail(message));
     }

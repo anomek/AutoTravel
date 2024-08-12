@@ -82,7 +82,7 @@ internal unsafe class SelectWorldStep : BaseStep
                     if (selectedDcIndex == -1)
                     {
                         this.step = -1;
-                        this.Fail($"Cannot travel to selected Data Center: {this.targetDcName}\nData Center unavilable as a travel destination");
+                        this.Fail(StepFailure.DataCenterUnavailable);
                     }
                     else
                     {
@@ -129,7 +129,7 @@ internal unsafe class SelectWorldStep : BaseStep
                     if (selectedDirectly == -1)
                     {
                         this.step = -1;
-                        this.Fail($"No worlds available in selected Data Center: {this.targetDcName}");
+                        this.Fail(StepFailure.DataCenterWorldsUnavailable);
                     }
                     else
                     {

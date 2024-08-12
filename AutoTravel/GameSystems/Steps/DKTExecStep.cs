@@ -53,7 +53,7 @@ internal unsafe class DKTExecStep : BaseStep
         if (this.running && addon->AtkUnitBase.IsVisible)
         {
             this.running = false;
-            this.Fail("Can't travel to selected Data Center");
+            this.Fail(StepFailure.DKTExecGenericFailure);
         }
     }
 }

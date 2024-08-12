@@ -84,7 +84,8 @@ public unsafe class AddonInterface<TAddon> : IDisposable
         this.internalRegisteredEventHandlers.Clear();
         this.eventRegistrations.ForEach((Action<EventRegistration<TAddon>>)(registration =>
         {
-            var handle = this.eventManager.AddEvent(args.Addon, registration.GetComponent(addon), registration.EventType, (IAddonEventManager.AddonEventHandler)((_, addonPtr, _) => registration.Callback.Invoke((TAddon*)addonPtr)));
+            var reg = registration;
+            var handle = this.eventManager.AddEvent(args.Addon, registration.GetComponent(addon), registration.EventType, (IAddonEventManager.AddonEventHandler)((_, addonPtr, _) => reg.Callback.Invoke((TAddon*)addonPtr)));
             if (handle != null)
             {
                 this.internalRegisteredEventHandlers.Add(handle);

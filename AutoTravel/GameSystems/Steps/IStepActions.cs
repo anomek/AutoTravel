@@ -4,5 +4,5 @@ internal interface IStepActions
 {
     void OnSuccess();
 
-    void OnFail(string message);
+    void OnFail(StepFailure failure);
 }

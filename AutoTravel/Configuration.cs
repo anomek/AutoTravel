@@ -11,6 +11,8 @@ public class Configuration : IPluginConfiguration
 
     public bool ShowAutoTravelButtonInGame { get; set; } = true;
 
+    public bool RetryCongestedDataCenter { get; set; } = false;
+
     // the below exist just to make saving less cumbersome
     public void Save()
     {

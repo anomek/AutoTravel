@@ -53,7 +53,7 @@ internal unsafe class ConfirmHomeTravelStep : BaseStep
         {
             Plugin.Log.Info("ConfirmHomeTravelStep: running=false (fail)");
             this.running = false;
-            this.Fail("Can't travel right now");
+            this.Fail(StepFailure.WorldTravelCooldown);
         }
     }
 }

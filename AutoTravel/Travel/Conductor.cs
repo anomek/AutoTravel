@@ -62,11 +62,16 @@ internal class Conductor : IDisposable
     /// </summary>
     private readonly BaseStep loginStep;
 
+    /// <summary>
+    /// Close World Travel list window with cancel.
+    /// </summary>
+    private readonly BaseStep cancelWorldList;
+
     internal Conductor(TravelSteps travelSteps, CharacterList characterList)
     {
         this.characterList = characterList;
         this.eventLoop = travelSteps.EventLoop;
-        this.logoutStep = new StepList(this.eventLoop, this.StepActions(this.OnCharacterSelectionScreen), travelSteps.SystemMenuStep, travelSteps.LogoutStep, travelSteps.ConfirmYesNo, travelSteps.StartStep);
+        this.logoutStep = new StepList(this.eventLoop, this.StepActions(this.OnCharacterSelectionScreen), travelSteps.SystemMenuStep, travelSteps.LogoutStep, travelSteps.ConfirmLogout, travelSteps.StartStep);
         this.clickCharacterStep = travelSteps.ClickCharacterStep(this.StepActions(this.OnCharacterClicked));
         this.contextMenuStep = travelSteps.ContextMenuStep(this.StepActions(this.OnContextMenu));
         this.confirmDcTravel = travelSteps.ConfirmDcTravel(this.StepActions(this.OnDcTravelConfirmed));
@@ -74,6 +79,7 @@ internal class Conductor : IDisposable
         this.travelStep = new StepList(this.eventLoop, this.StepActions(this.OnCharacterSelectionScreen), travelSteps.ConfirmDcTravelExec, travelSteps.SelectOkStep);
         this.confirmReturnHome = new StepList(this.eventLoop, this.StepActions(this.OnCharacterSelectionScreen), travelSteps.ConfirmHomeTravel, travelSteps.SelectOkStep);
         this.loginStep = travelSteps.ConfirmYesNo(this.StepActions(this.OnLoggedIn));
+        this.cancelWorldList = new StepList(this.eventLoop, this.StepActions(this.OnCharacterSelectionScreen), travelSteps.DelayStep(TimeSpan.FromSeconds(2)), travelSteps.CancelWorldList, travelSteps.DelayStep(TimeSpan.FromSeconds(.1)));
     }
 
     public void Dispose()
@@ -86,6 +92,7 @@ internal class Conductor : IDisposable
         this.selectWorldStep.Dispose();
         this.travelStep.Dispose();
         this.loginStep.Dispose();
+        this.cancelWorldList.Dispose();
     }
 
     internal void TravelToWorld(Player from, DestinationDc dc, string? name)
@@ -94,7 +101,7 @@ internal class Conductor : IDisposable
         {
             if (this.travelState.Traveling)
             {
-                this.OnFailure("Can't start auto travel: already active");
+                this.OnFailure(StepFailure.AlreadyTraveling);
                 return;
             }
 
@@ -129,10 +136,17 @@ internal class Conductor : IDisposable
         });
     }
 
-    private void OnFailure(string message)
+    private void OnFailure(StepFailure message)
     {
-        this.travelState.Traveling = false;
-        this.OnTravelFail?.Invoke(message);
+        if (message == StepFailure.DataCenterWorldsUnavailable && Plugin.Configuration.RetryCongestedDataCenter)
+        {
+            this.Run(this.cancelWorldList);
+        }
+        else
+        {
+            this.travelState.Traveling = false;
+            this.OnTravelFail?.Invoke(message.ToString());
+        }
     }
 
     //--------------
@@ -171,7 +185,7 @@ internal class Conductor : IDisposable
             {
                 Plugin.Log.Info("No character maching");
                 Plugin.Log.Info(data.ToString());
-                this.OnFailure($"Can't find character {this.travelState.PlayerFullName}");
+                this.OnFailure(StepFailure.CharacterNotFound);
             }
             else
             {
@@ -230,7 +244,7 @@ internal class Conductor : IDisposable
         {
             if (this.travelState.TargetDc == null)
             {
-                this.OnFailure("Target Data Center was not selected");
+                this.OnFailure(StepFailure.DataCenterNotSelected);
             }
             else
             {
