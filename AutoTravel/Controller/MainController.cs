@@ -55,7 +55,7 @@ public class MainController
 
     internal void Refresh()
     {
-        this.UI.TravelButtonOpen(this.TravelList.IsInWorldReadyToTravel() && Plugin.Configuration.ShowAutoTravelButtonInGame);
+        this.UI.TravelButtonOpen(this.TravelList.IsInWorldReadyToTravel() && Plugin.Configuration.ButtonInGameShow);
         if (this.State.Traveling)
         {
             this.UI.TravelButtonsOpen([]);

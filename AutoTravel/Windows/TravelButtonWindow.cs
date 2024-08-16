@@ -16,8 +16,9 @@ internal class TravelButtonWindow : Window, IDisposable
     private readonly bool moveable;
     private readonly int index;
 
-    private float? positionX;
-    private float? positionY;
+    private float? changePositionX;
+    private float? changePositionY;
+    private bool firstDraw = true;
     private bool movingShortcut;
     private Vector2 movingMouse;
     private float shortcutOpacity = 0.5f;
@@ -38,12 +39,23 @@ internal class TravelButtonWindow : Window, IDisposable
 
     public override void Draw()
     {
-        if (this.positionX != null || this.positionY != null)
+        if (this.changePositionX != null || this.changePositionY != null)
         {
             var curPos = ImGui.GetWindowPos();
-            ImGui.SetWindowPos(new Vector2(this.positionX ?? curPos.X, this.positionY ?? curPos.Y));
-            this.positionX = null;
-            this.positionY = null;
+            ImGui.SetWindowPos(new Vector2(this.changePositionX ?? curPos.X, this.changePositionY ?? curPos.Y));
+            this.changePositionX = null;
+            this.changePositionY = null;
+        }
+
+        if (this.firstDraw)
+        {
+            if (this.index == 0)
+            {
+                Plugin.Log.Info($"{ImGui.GetWindowPos().X}");
+                this.controller.AlignCharacterButtons(ImGui.GetWindowPos().X);
+            }
+
+            this.firstDraw = false;
         }
 
         this.MainButton();
@@ -52,20 +64,21 @@ internal class TravelButtonWindow : Window, IDisposable
 
     internal void SetPositionY(float y)
     {
-        this.positionY = y - 2;
+        this.changePositionY = y - 2;
     }
 
     internal void SetPositionX(float x)
     {
-        this.positionX = x;
+        this.changePositionX = x;
     }
 
     private void MainButton()
     {
         var icon = this.tools.GetIconWrap(59285);
-        ImGui.SetWindowSize(icon.Size + new Vector2(10, 10));
+        var size = ScaleIcon(icon.Size);
+        ImGui.SetWindowSize(size + new Vector2(10, 10));
         ImGui.SetCursorPos(new Vector2(5, 5));
-        ImGui.Image(icon.ImGuiHandle, icon.Size, new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 1.0f, 1.0f, this.shortcutOpacity));
+        ImGui.Image(icon.ImGuiHandle, size, new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 1.0f, 1.0f, this.shortcutOpacity));
 
         if (ImGui.IsItemHovered() == true)
         {
@@ -109,6 +122,24 @@ internal class TravelButtonWindow : Window, IDisposable
                 this.movingShortcut = false;
             }
         }
+    }
+
+    private Vector2 ScaleIcon(Vector2 iconSize)
+    {
+        var uiScale = 1f;
+        if (Plugin.GameConfig.TryGet(Dalamud.Game.Config.SystemConfigOption.UiHighScale,  out uint uiScaleIndex))
+        {
+            uiScale = uiScaleIndex switch
+            {
+                0 => 1,
+                1 => 1.5f,
+                2 => 2,
+                3 => 3,
+                _ => 1,
+            };
+        }
+
+        return iconSize * Plugin.Configuration.ScaleButton(this.index, uiScale) / 2;
     }
 
     private void DrawPopup(string name)

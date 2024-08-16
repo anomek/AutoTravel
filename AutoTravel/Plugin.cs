@@ -46,6 +46,8 @@ public sealed unsafe class Plugin : IDalamudPlugin
 
     [PluginService] internal static IFramework Framework { get; private set; } = null!;
 
+    [PluginService] internal static IGameConfig GameConfig { get; private set; } = null!;
+
 #pragma warning restore SA1134 // Attributes should not share line
 
     internal static Configuration Configuration { get; private set; } = null!;
