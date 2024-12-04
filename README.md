@@ -1,5 +1,8 @@
 # <img src="res/icon.png" width="64"> AutoTravel
 
+# 7.11
+Plugin is broken in 7.11, I will fix it first week January 2025. Sorry about this
+
 Travel between datacenters with single click
 
 ## Installation
