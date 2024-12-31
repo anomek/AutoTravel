@@ -12,11 +12,11 @@ public unsafe partial struct AddonCharaSelectListMenu
 {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x238)] public AtkComponentButton* NewCharacterButton;
-    [FieldOffset(0x240)] public AtkComponentButton* WorldButton;
-    [FieldOffset(0x248)] public AtkComponentList* CharaList;                // list of characters
-    [FieldOffset(0x250)] public AtkTextNode* WorldTextNode;
-    [FieldOffset(0x258)] public AtkTextNode* ConnectionQualityTextNode;     // actual connection quality value
-    [FieldOffset(0x260)] public AtkTextNode* CharaCountTextNode;            // node with 1/8 text
-    [FieldOffset(0x270)] public AtkComponentButton* BackupUiClientButton;
+    [FieldOffset(0x240)] public AtkComponentButton* NewCharacterButton;
+    [FieldOffset(0x248)] public AtkComponentButton* WorldButton;
+    [FieldOffset(0x250)] public AtkComponentList* CharaList;                // list of characters
+    [FieldOffset(0x258)] public AtkTextNode* WorldTextNode;
+    [FieldOffset(0x260)] public AtkTextNode* ConnectionQualityTextNode;     // actual connection quality value
+    [FieldOffset(0x268)] public AtkTextNode* CharaCountTextNode;            // node with 1/8 text
+    [FieldOffset(0x278)] public AtkComponentButton* BackupUiClientButton;
 }

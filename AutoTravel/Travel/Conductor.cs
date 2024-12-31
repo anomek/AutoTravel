@@ -207,12 +207,12 @@ internal class Conductor : IDisposable
             }
             else if (this.travelState.IsAtHomeWorld())
             {
-                this.contextMenuStep.SetItem(8);
+                this.contextMenuStep.SetItem(9);
                 this.Run(this.contextMenuStep);
             }
             else
             {
-                this.contextMenuStep.SetItem(6);
+                this.contextMenuStep.SetItem(7);
                 this.Run(this.contextMenuStep);
             }
         }

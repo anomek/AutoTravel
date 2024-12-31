@@ -75,7 +75,7 @@ internal class TravelButtonWindow : Window, IDisposable
     private void MainButton()
     {
         var icon = this.tools.GetIconWrap(59285);
-        var size = ScaleIcon(icon.Size);
+        var size = this.ScaleIcon(icon.Size);
         ImGui.SetWindowSize(size + new Vector2(10, 10));
         ImGui.SetCursorPos(new Vector2(5, 5));
         ImGui.Image(icon.ImGuiHandle, size, new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 1.0f, 1.0f, this.shortcutOpacity));

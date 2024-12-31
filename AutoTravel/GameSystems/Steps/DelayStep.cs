@@ -15,7 +15,6 @@ internal class DelayStep : BaseStep
     private readonly TimeSpan timeSpan;
 
     private bool running;
-    
 
     public DelayStep(TimeSpan timeSpan, EventLoop eventLoop, IStepActions actions)
         : base(eventLoop, actions)

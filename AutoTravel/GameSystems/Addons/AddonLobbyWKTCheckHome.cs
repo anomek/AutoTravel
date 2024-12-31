@@ -12,6 +12,6 @@ internal unsafe partial struct AddonLobbyWKTCheckHome
 {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x230)] public AtkComponentButton* ProcceedButton;
-    [FieldOffset(0x238)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x238)] public AtkComponentButton* ProcceedButton;
+    [FieldOffset(0x240)] public AtkComponentButton* CancelButton;
 }

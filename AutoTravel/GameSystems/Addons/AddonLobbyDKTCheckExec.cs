@@ -12,6 +12,6 @@ public unsafe partial struct AddonLobbyDKTCheckExec
 {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x240)] public AtkComponentButton* ProceedButton;
-    [FieldOffset(0x250)] public AtkComponentButton* PreviousStepButton;
+    [FieldOffset(0x248)] public AtkComponentButton* ProceedButton;
+    [FieldOffset(0x258)] public AtkComponentButton* PreviousStepButton;
 }

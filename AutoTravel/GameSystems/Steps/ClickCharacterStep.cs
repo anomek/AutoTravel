@@ -91,7 +91,7 @@ internal unsafe class ClickCharacterStep : BaseStep
         return new()
         {
             Listener = &atkUnitBase.AtkEventListener,
-            Flags = flags,
+            Param = flags,
             Target = &AtkStage.Instance()->AtkEventTarget,
         };
     }

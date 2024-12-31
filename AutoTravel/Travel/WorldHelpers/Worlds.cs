@@ -6,9 +6,9 @@ internal class Worlds
 {
     private readonly Dictionary<string, World> byName = [];
 
-    internal World? Find(Lumina.Excel.GeneratedSheets.World? gameData)
+    internal World? Find(Lumina.Excel.Sheets.World? gameData)
     {
-        return this.Find(gameData?.Name?.ToString());
+        return this.Find(gameData?.Name.ToString());
     }
 
     internal World? Find(string? name)
@@ -16,10 +16,11 @@ internal class Worlds
         return name == null ? null : this.byName.GetValueOrDefault(name);
     }
 
-    internal World Register(Lumina.Excel.GeneratedSheets.World world, DataCenter dataCenter)
+    internal World Register(Lumina.Excel.Sheets.World world, DataCenter dataCenter)
     {
-        var worldObj = new World(world.Name, dataCenter);
-        this.byName[world.Name] = worldObj;
+        var name = world.Name.ToString();
+        var worldObj = new World(name, dataCenter);
+        this.byName[name] = worldObj;
         return worldObj;
     }
 }

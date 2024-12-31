@@ -40,8 +40,8 @@ internal class WhereIAm(IClientState clientState, ICondition condition)
             return null;
         }
 
-        var current = WorldHelper.Worlds.Find(localPlayer.CurrentWorld.GameData);
-        var home = WorldHelper.Worlds.Find(localPlayer.HomeWorld.GameData);
+        var current = WorldHelper.Worlds.Find(localPlayer.CurrentWorld.ValueNullable);
+        var home = WorldHelper.Worlds.Find(localPlayer.HomeWorld.ValueNullable);
         return current == null || home == null
             ? null
             : new Player(localPlayer.Name.ToString(), current, home);
@@ -65,7 +65,7 @@ internal class WhereIAm(IClientState clientState, ICondition condition)
         };
 
         this.clientState.Login += onChange;
-        this.clientState.Logout += onChange;
+        this.clientState.Logout += (type, code) => { onChange(); };
         this.clientState.LeavePvP += onChange;
         this.clientState.EnterPvP += onChange;
     }

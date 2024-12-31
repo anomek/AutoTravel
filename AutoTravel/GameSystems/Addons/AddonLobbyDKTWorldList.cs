@@ -12,9 +12,9 @@ public unsafe partial struct AddonLobbyDKTWorldList
 {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x248)] public AtkComponentTreeList* SelectDataCenterList;
-    [FieldOffset(0x288)] public AtkComponentTreeList* SelectWorldList;
+    [FieldOffset(0x250)] public AtkComponentTreeList* SelectDataCenterList;
+    [FieldOffset(0x290)] public AtkComponentTreeList* SelectWorldList;
 
-    [FieldOffset(0x2c0)] public AtkComponentButton* ConfirmButton;
-    [FieldOffset(0x2c8)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x2c8)] public AtkComponentButton* ConfirmButton;
+    [FieldOffset(0x2d0)] public AtkComponentButton* CancelButton;
 }

@@ -55,7 +55,7 @@ public sealed unsafe class Plugin : IDalamudPlugin
     private readonly MainController mainController = new();
     private readonly UI ui;
 
-    private readonly AddonInterface<AddonLobbyWKTCheckHome> debugAddon;
+    private readonly AddonInterface<AddonLobbyDKTWorldList> debugAddon;
 
     private readonly EventLoop eventLoop = new();
     private readonly Conductor conductor;
@@ -83,10 +83,11 @@ public sealed unsafe class Plugin : IDalamudPlugin
         this.mainController.Init();
         this.ui.Register(PluginInterface.UiBuilder);
 
-        this.debugAddon = addonInterfaceProvider.AddonInterface<AddonLobbyWKTCheckHome>("LobbyWKTCheckHome");
 
-        // this.debugAddon.AddHandler(AddonEvent.PostSetup, this.DebugAddon);
 #if DEBUG
+        this.debugAddon = addonInterfaceProvider.AddonInterface<AddonLobbyDKTWorldList>("_CharaSelectListMenu");
+        this.debugAddon.AddHandler(Dalamud.Game.Addon.Lifecycle.AddonEvent.PostUpdate, this.DebugAddon);
+
         PluginInterface.OpenDeveloperMenu();
         Callbacks.InstallHook();
 #endif
@@ -102,10 +103,17 @@ public sealed unsafe class Plugin : IDalamudPlugin
         this.debugAddon.Dispose();
     }
 
-    private void DebugAddon(AddonLobbyWKTCheckHome* addon)
+
+    bool debugRun = false;
+    private void DebugAddon(AddonLobbyDKTWorldList* addon)
     {
+        if (debugRun)
+        {
+            return;
+        }
+        debugRun = true;
         var basePointer = (nint*)addon;
-        for (var i = 0; i < 100; i++)
+        for (var i = 0; i < 130; i++)
         {
             Log.Info($"{i * 8:x}: {basePointer[i]:x}");
         }

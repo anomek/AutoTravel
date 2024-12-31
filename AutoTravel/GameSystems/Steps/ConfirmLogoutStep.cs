@@ -84,6 +84,6 @@ internal unsafe class ConfirmLogoutStep : BaseStep
     {
         var btnRes = target->AtkComponentBase.OwnerNode->AtkResNode;
         var evt = btnRes.AtkEventManager.Event;
-        addon->ReceiveEvent(evt->Type, (int)evt->Param, btnRes.AtkEventManager.Event);
+        addon->ReceiveEvent(evt->State.EventType, (int)evt->Param, btnRes.AtkEventManager.Event);
     }
 }

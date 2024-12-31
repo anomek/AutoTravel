@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Lumina.Excel.Sheets;
+
 namespace AutoTravel.Travel.WorldHelpers;
 
 internal class DataCenters
@@ -7,10 +9,11 @@ internal class DataCenters
     private readonly Dictionary<uint, DataCenter> byId = [];
     private readonly Dictionary<string, DataCenter> byName = [];
 
-    internal DataCenter Register(Lumina.Excel.GeneratedSheets.WorldDCGroupType dc, Region region, IReadOnlyList<World> worlds)
+    internal DataCenter Register(WorldDCGroupType dc, Region region, IReadOnlyList<World> worlds)
     {
-        var dataCenter = new DataCenter(dc.RowId, dc.Name, region, worlds);
-        this.byName[dc.Name] = dataCenter;
+        var name = dc.Name.ToString();
+        var dataCenter = new DataCenter(dc.RowId, name, region, worlds);
+        this.byName[name] = dataCenter;
         this.byId[dc.RowId] = dataCenter;
         return dataCenter;
     }

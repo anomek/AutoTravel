@@ -11,6 +11,7 @@ internal unsafe class ConfirmHomeTravelStep : BaseStep
     private readonly AddonInterface<AddonSelectOk> selectOkAddon;
 
     private bool running;
+    private int delay;
 
     internal ConfirmHomeTravelStep(AddonInterfaceProvider addonInterfaceProvider, EventLoop eventLoop, IStepActions actions)
         : base(eventLoop, actions)
@@ -30,6 +31,7 @@ internal unsafe class ConfirmHomeTravelStep : BaseStep
     protected override void RunInternal()
     {
         this.running = true;
+        this.delay = 30;
     }
 
     protected override void CancelInternal()
@@ -39,7 +41,7 @@ internal unsafe class ConfirmHomeTravelStep : BaseStep
 
     private void Handle(AddonLobbyWKTCheckHome* addon)
     {
-        if (this.running && addon->ProcceedButton != null && addon->ProcceedButton->IsEnabled)
+        if (this.running && this.delay-- < 0 && addon->ProcceedButton != null && addon->ProcceedButton->IsEnabled)
         {
             this.running = false;
             Callbacks.Fire(&addon->AtkUnitBase, true, 0);

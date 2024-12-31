@@ -135,6 +135,7 @@ internal unsafe class SelectWorldStep : BaseStep
                     {
                         this.step++;
                         addon->SelectWorldList->SelectItem(selectedDirectly, true);
+                        Plugin.Log.Info($"Selecting world {selectedDirectly - 1}");
                         Callbacks.Fire(&addon->AtkUnitBase, true, 2, 0, selectedDirectly - 1, 0, 0);
                     }
                 }

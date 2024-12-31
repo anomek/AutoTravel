@@ -97,6 +97,7 @@ internal unsafe class CharacterList : IDisposable
 
             List<Vector2> positions = [];
             var length = this.addonPtr->CharaList->ListLength;
+            Plugin.Log.Info($"CharacterList has {length} entries");
             for (var i = 0; i < length; i++)
             {
                 positions.Add(new Vector2(

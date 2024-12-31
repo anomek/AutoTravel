@@ -12,7 +12,7 @@ public unsafe partial struct AddonLobbyDKTCheck
 {
     [FieldOffset(0)] public AtkUnitBase AtkUnitBase;
 
-    [FieldOffset(0x230)] public AtkComponentButton* HelpButton;
-    [FieldOffset(0x238)] public AtkComponentButton* SelectButton;
-    [FieldOffset(0x240)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x238)] public AtkComponentButton* HelpButton;
+    [FieldOffset(0x240)] public AtkComponentButton* SelectButton;
+    [FieldOffset(0x248)] public AtkComponentButton* CancelButton;
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 namespace AutoTravel.Travel.WorldHelpers;
 
@@ -34,9 +34,9 @@ internal class WorldHelper
             }
         }
 
-        foreach (var world in (IEnumerable<Lumina.Excel.GeneratedSheets.World>?)Plugin.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets.World>() ?? [])
+        foreach (var world in Plugin.DataManager.GetExcelSheet<Lumina.Excel.Sheets.World>())
         {
-            var dcId = world.DataCenter.Row;
+            var dcId = world.DataCenter.RowId;
             var dataCenter = DataCenters.Find(dcId);
             if (dataCenter != null && world.IsPublic)
             {

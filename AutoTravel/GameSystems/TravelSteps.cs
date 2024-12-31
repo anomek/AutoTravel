@@ -1,7 +1,8 @@
+using System;
+
 using AutoTravel.GameSystems.Steps;
 using AutoTravel.Utils;
 using Dalamud.Plugin.Services;
-using System;
 
 namespace AutoTravel.GameSystems;
 
