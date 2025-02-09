@@ -83,7 +83,6 @@ public sealed unsafe class Plugin : IDalamudPlugin
         this.mainController.Init();
         this.ui.Register(PluginInterface.UiBuilder);
 
-
 #if DEBUG
         this.debugAddon = addonInterfaceProvider.AddonInterface<AddonLobbyDKTWorldList>("_CharaSelectListMenu");
         this.debugAddon.AddHandler(Dalamud.Game.Addon.Lifecycle.AddonEvent.PostUpdate, this.DebugAddon);
@@ -99,19 +98,21 @@ public sealed unsafe class Plugin : IDalamudPlugin
         this.eventLoop.Dispose();
         this.conductor.Dispose();
         Callbacks.Dispose();
-
+#if DEBUG
         this.debugAddon.Dispose();
+#endif
     }
 
+    private bool debugRun = false;
 
-    bool debugRun = false;
     private void DebugAddon(AddonLobbyDKTWorldList* addon)
     {
-        if (debugRun)
+        if (this.debugRun)
         {
             return;
         }
-        debugRun = true;
+
+        this.debugRun = true;
         var basePointer = (nint*)addon;
         for (var i = 0; i < 130; i++)
         {
