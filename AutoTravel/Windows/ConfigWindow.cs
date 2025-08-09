@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoTravel.Controller;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace AutoTravel.Windows;
 

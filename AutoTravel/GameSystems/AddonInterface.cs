@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Dalamud.Game.Addon.Events;
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
+using Dalamud.Game.NativeWrapper;
 using Dalamud.Plugin.Services;
 
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
@@ -64,7 +65,7 @@ public unsafe class AddonInterface<TAddon> : IDisposable
 
     private void OnAddonEvent(AddonEvent type, AddonArgs args)
     {
-        var addon = (TAddon*)args.Addon;
+        var addon = (TAddon*)args.Addon.Address;
         switch (type)
         {
             case AddonEvent.PostSetup:
@@ -85,7 +86,7 @@ public unsafe class AddonInterface<TAddon> : IDisposable
         this.eventRegistrations.ForEach((Action<EventRegistration<TAddon>>)(registration =>
         {
             var reg = registration;
-            var handle = this.eventManager.AddEvent(args.Addon, registration.GetComponent(addon), registration.EventType, (IAddonEventManager.AddonEventHandler)((_, addonPtr, _) => reg.Callback.Invoke((TAddon*)addonPtr)));
+            var handle = this.eventManager.AddEvent(args.Addon, registration.GetComponent(addon), registration.EventType, (IAddonEventManager.AddonEventDelegate)((eventType, eventData) => reg.Callback.Invoke((TAddon*)eventData.AddonPointer)));
             if (handle != null)
             {
                 this.internalRegisteredEventHandlers.Add(handle);

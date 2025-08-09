@@ -17,14 +17,14 @@ internal unsafe class SystemMenuStep(IGameGui gameGui, EventLoop eventLoop, ISte
     {
         Plugin.Log.Info("Runing logout step");
         var addonAddr = this.gameGui.GetAddonByName("_MainCommand");
-        if (addonAddr == 0)
+        if (addonAddr.IsNull)
         {
             this.Fail(StepFailure.LogoutUnavailable);
         }
         else
         {
 #pragma warning disable SA1117 // Parameters should be on same line or separate lines
-            Callbacks.Fire((AtkUnitBase*)addonAddr, true,
+            Callbacks.Fire((AtkUnitBase*)addonAddr.Address, true,
                 2, 1,
                 "System", 3742, 2006,
                 12,

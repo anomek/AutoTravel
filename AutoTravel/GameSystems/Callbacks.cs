@@ -17,11 +17,11 @@ using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
 namespace AutoTravel.GameSystems;
 
 /*
- * source: https://github.com/NightmareXIV/ECommons/blob/master/ECommons/Automation/actions.cs
+ * source: https://github.com/NightmareXIV/ECommons/blob/master/ECommons/Automation/Callback.cs
  */
 public static unsafe class Callbacks
 {
-    private static readonly string Sig = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 0F B7 81";
+    private static readonly string Sig = "48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 54 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? BF";
     internal delegate byte AtkUnitBase_FireCallbacksDelegate(AtkUnitBase* Base, int valueCount, AtkValue* values, byte updateState);
     internal static AtkUnitBase_FireCallbacksDelegate Fireactions = null;
     private static Hook<AtkUnitBase_FireCallbacksDelegate> AtkUnitBase_FireactionsHook;
