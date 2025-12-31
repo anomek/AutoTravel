@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AutoTravel.Controller;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
-using Dalamud.Bindings.ImGui;
 
 namespace AutoTravel.Windows;
 

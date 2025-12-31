@@ -4,9 +4,9 @@ using System.Numerics;
 using AutoTravel;
 using AutoTravel.Controller;
 using AutoTravel.Windows;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
-using Dalamud.Bindings.ImGui;
 
 internal class TravelButtonWindow : Window, IDisposable
 {

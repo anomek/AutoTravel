@@ -32,8 +32,6 @@ public sealed unsafe class Plugin : IDalamudPlugin
 
     [PluginService] internal static ISigScanner SigScanner { get; private set; } = null!;
 
-    [PluginService] internal static IClientState ClientState { get; private set; } = null!;
-
     [PluginService] internal static IDataManager DataManager { get; private set; } = null!;
 
     [PluginService] internal static IToastGui Toast { get; private set; } = null!;
@@ -47,6 +45,8 @@ public sealed unsafe class Plugin : IDalamudPlugin
     [PluginService] internal static IFramework Framework { get; private set; } = null!;
 
     [PluginService] internal static IGameConfig GameConfig { get; private set; } = null!;
+
+    [PluginService] internal static IPlayerState PlayerState { get; private set; } = null!;
 
 #pragma warning restore SA1134 // Attributes should not share line
 
@@ -69,7 +69,7 @@ public sealed unsafe class Plugin : IDalamudPlugin
         this.ui = new(this.mainController, TextureProvider);
 
         var addonInterfaceProvider = new AddonInterfaceProvider(AddonLifecycle, AddonEventManager);
-        var whereIAm = new WhereIAm(ClientState, Condition);
+        var whereIAm = new WhereIAm(PlayerState, Condition);
         var travelActions = new TravelSteps(GameGui, addonInterfaceProvider, this.eventLoop);
         var characterList = new CharacterList(addonInterfaceProvider);
 

@@ -77,7 +77,9 @@ public static unsafe class Callbacks
         try
         {
             var svalues = DecodeValues(valueCount, values).Select(x => $"    {x}");
-            // PluginLog.Info($"actions on {Base->NameString}, valueCount={valueCount}, updateState ={updateState}\n{string.Join("\n", svalues)}");
+#if DEBUG
+            PluginLog.Info($"actions on {Base->NameString}, valueCount={valueCount}, updateState ={updateState}\n{string.Join("\n", svalues)}");
+#endif
         }
         catch (Exception e)
         {

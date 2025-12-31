@@ -7,7 +7,7 @@ using Dalamud.Plugin.Services;
 
 namespace AutoTravel.GameSystems;
 
-internal class WhereIAm(IClientState clientState, ICondition condition)
+internal class WhereIAm(IPlayerState playerState, ICondition condition)
 {
     private static readonly ConditionFlag[] Conditions = [
         ConditionFlag.BetweenAreas, ConditionFlag.BetweenAreas51, ConditionFlag.BoundByDuty, ConditionFlag.BoundByDuty56, ConditionFlag.BoundByDuty95,
@@ -29,28 +29,26 @@ internal class WhereIAm(IClientState clientState, ICondition condition)
         }
     }
 
-    private readonly IClientState clientState = clientState;
+    private readonly IPlayerState playerState = playerState;
     private readonly ICondition condition = condition;
 
     internal Player? GetPlayerLocation()
     {
-        var localPlayer = this.clientState.LocalPlayer;
-        if (localPlayer == null)
+        if (!this.playerState.IsLoaded)
         {
             return null;
         }
 
-        var current = WorldHelper.Worlds.Find(localPlayer.CurrentWorld.ValueNullable);
-        var home = WorldHelper.Worlds.Find(localPlayer.HomeWorld.ValueNullable);
+        var current = WorldHelper.Worlds.Find(this.playerState.CurrentWorld.ValueNullable);
+        var home = WorldHelper.Worlds.Find(this.playerState.HomeWorld.ValueNullable);
         return current == null || home == null
             ? null
-            : new Player(localPlayer.Name.ToString(), current, home);
+            : new Player(this.playerState.CharacterName, current, home);
     }
 
     internal bool IsInGameReadyToTravel()
     {
-        return this.clientState.IsLoggedIn
-            && !this.clientState.IsPvPExcludingDen
+        return this.playerState.IsLoaded
             && !this.condition.Any(Conditions);
     }
 
@@ -64,9 +62,10 @@ internal class WhereIAm(IClientState clientState, ICondition condition)
             }
         };
 
-        this.clientState.Login += onChange;
-        this.clientState.Logout += (type, code) => { onChange(); };
-        this.clientState.LeavePvP += onChange;
-        this.clientState.EnterPvP += onChange;
+        // IClientState got deprecated and i can't find good replacements for these events
+        // this.playerState.Login += onChange;
+        // this.playerState.Logout += (type, code) => { onChange(); };
+        // this.playerState.LeavePvP += onChange;
+        // this.playerState.EnterPvP += onChange;
     }
 }
