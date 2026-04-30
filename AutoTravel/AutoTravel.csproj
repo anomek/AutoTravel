@@ -2,7 +2,7 @@
 <Project Sdk="Dalamud.NET.SDK/15.0.0">
 
   <PropertyGroup>
-    <Version>0.0.7.0</Version>
+    <Version>0.0.8.0</Version>
     <Description>AutoTravel plugin for Dalamud.</Description>
     <PackageProjectUrl>https://github.com/anomek/AutoTravel</PackageProjectUrl>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
