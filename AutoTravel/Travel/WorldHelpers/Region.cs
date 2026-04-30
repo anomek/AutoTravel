@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace AutoTravel.Travel.WorldHelpers;
 
-internal class Region(byte id, IReadOnlyList<DataCenter> dataCenters)
+internal class Region(uint id, IReadOnlyList<DataCenter> dataCenters)
 {
-    internal byte Id { get; } = id;
+    internal uint Id { get; } = id;
 
     internal IReadOnlyList<DataCenter> DataCenters { get; } = dataCenters;
 

@@ -14,7 +14,7 @@ internal class WorldHelper
 
     internal static void Init()
     {
-        Dictionary<byte, List<DataCenter>> dcPerRegion = [];
+        Dictionary<uint, List<DataCenter>> dcPerRegion = [];
         Dictionary<uint, List<World>> worldPerDc = [];
         foreach (var regionId in new List<byte> { 1, 2, 3, 4 })
         {
@@ -24,13 +24,13 @@ internal class WorldHelper
 
         foreach (var dc in (IEnumerable<WorldDCGroupType>?)Plugin.DataManager.GetExcelSheet<WorldDCGroupType>() ?? [])
         {
-            var region = Regions.Find(dc.Region);
+            var region = Regions.Find(dc.Region.RowId);
             if (region != null)
             {
                 worldPerDc[dc.RowId] = [];
 
                 var dataCenter = DataCenters.Register(dc, region, worldPerDc[dc.RowId]);
-                dcPerRegion[dc.Region].Add(dataCenter);
+                dcPerRegion[dc.Region.RowId].Add(dataCenter);
             }
         }
 
