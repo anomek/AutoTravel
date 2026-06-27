@@ -1,4 +1,4 @@
-# <img src="res/icon.png" width="64"> AutoTravel
+# ![AutoTravel](images/icon.png) AutoTravel
 
 Travel between datacenters with single click
 
@@ -14,8 +14,8 @@ See: https://github.com/anomek/MyDalamudPlugins
 * If no worlds are available, it will keep retring (needs to be enabled in configuration)
 
 
-![](res/image1.png)
-![](res/image2.png)
+![](images/image1.png)
+![](images/image2.png)
 
 ## Acknowledgments
 

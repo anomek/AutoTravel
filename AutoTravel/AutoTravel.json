@@ -11,10 +11,10 @@
         "travel"
     ],
     "RepoUrl": "https://github.com/Anomek/AutoTravel",
-    "IconUrl": "https://github.com/Anomek/AutoTravel/raw/master/res/icon.png",
+    "IconUrl": "https://github.com/Anomek/AutoTravel/raw/master/images/icon.png",
     "ImageUrls": [
-        "https://github.com/anomek/AutoTravel/raw/master/res/image1.png",
-        "https://github.com/anomek/AutoTravel/raw/master/res/image2.png"
+        "https://github.com/anomek/AutoTravel/raw/master/images/image1.png",
+        "https://github.com/anomek/AutoTravel/raw/master/images/image2.png"
     ],
     "Changelog": "https://github.com/anomek/AutoTravel/releases"
 }
